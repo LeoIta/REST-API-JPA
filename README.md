@@ -12,7 +12,7 @@
     @OneToOne(mappedBy = "address")<br>
     @JsonIgnoreProperties("address")<br>
     private Student student;<br>}
-    <br>---------------------------------------------------------------------<br>
+    <br>--------------------------------------------------------------------<br>
     public class Student {<br>
     @OneToOne(cascade = CascadeType.ALL)<br>
     @JoinColumn(name = "address_id", referencedColumnName = "id")<br>
@@ -28,7 +28,7 @@
     @JoinColumn(name="course_id")<br>
     @JsonIgnoreProperties("student")<br>
     private Course course;<br>}
-    <br>---------------------------------------------------------------------<br>
+    <br>--------------------------------------------------------------------<br>
     @Table(name="course")<br>
     public class Course {<br>
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)<br>
@@ -49,7 +49,7 @@
     &emsp;&emsp;&emsp;&emsp;inverseJoinColumns = {@JoinColumn(name = "course_id")}<br>
     @JsonIgnoreProperties("topic")<br>
     private Set&lt;Course&gt; courses;<br>}
-    <br>----------------------------------------------------------------------<br>
+    <br>--------------------------------------------------------------------<br>
     @Table(name="course")<br>
     public class Course {<br>
     @ManyToMany(mappedBy = "courses")<br>)<br>
