@@ -5,6 +5,6 @@ public enum TopicName {
     STATEMENTS,
     LOOPS,
     COLLECTIONS,
-    CLASS,
-    FRAMEWORK,
+    CLASSES,
+    FRAMEWORKS,
 }

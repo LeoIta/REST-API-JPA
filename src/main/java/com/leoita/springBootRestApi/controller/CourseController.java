@@ -54,6 +54,18 @@ public class CourseController {
     @DeleteMapping("/{course-id}")
     public String deleteCourse(@PathVariable("course-id") String Id) {
         courseService.deleteCourse(Id);
-        return "course with id "+ Id +" has been deleted";
+        return "course with id " + Id + " has been deleted";
+    }
+
+    @PatchMapping("/{course-id}/{student-id}")
+    public Course addStudentToCourse(@PathVariable("course-id") String courseId,
+                                     @PathVariable("student-id") String studentId) {
+        return courseService.addStudentToCourse(courseId, studentId);
+    }
+
+    @PatchMapping("/{course-id}/{topic-id}")
+    public Course addTopicToCourse(@PathVariable("course-id") String courseId,
+                                   @PathVariable("topic-id") String topicId) {
+        return courseService.addTopicToCourse(courseId, topicId);
     }
 }

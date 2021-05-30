@@ -1,6 +1,7 @@
 package com.leoita.springBootRestApi.service;
 
 import com.leoita.springBootRestApi.model.Student;
+import com.leoita.springBootRestApi.repository.CourseRepository;
 import com.leoita.springBootRestApi.repository.StudentRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StudentService {
+
     private final StudentRepository studentRepository;
 
     public List<Student> getStudents() {
@@ -29,4 +31,5 @@ public class StudentService {
     public void deleteStudent(String id) {
         studentRepository.deleteById(id);
     }
+
 }

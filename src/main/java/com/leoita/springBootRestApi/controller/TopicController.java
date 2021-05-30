@@ -1,6 +1,7 @@
 package com.leoita.springBootRestApi.controller;
 
 import com.leoita.springBootRestApi.model.Topic;
+import com.leoita.springBootRestApi.service.CourseService;
 import com.leoita.springBootRestApi.service.TopicService;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class TopicController {
     private final TopicService topicService;
+    private final CourseService courseService;
 
     @GetMapping
     public List<Topic> getTopics() {
@@ -38,8 +40,8 @@ public class TopicController {
     }
 
     @PatchMapping("/{id}")
-    public Topic updateCourseParameter(@PathVariable("id") String Id,
-                                           @RequestBody Map<String, Object> fields) {
+    public Topic updateTopicParameter(@PathVariable("id") String Id,
+                                       @RequestBody Map<String, Object> fields) {
         Topic topic = topicService.getTopic(Id);
         fields.forEach((key, value) -> {
             Field field = ReflectionUtils.findField(Topic.class, key);
@@ -54,6 +56,12 @@ public class TopicController {
     @DeleteMapping("/{id}")
     public String deleteTopic(@PathVariable("id") String Id) {
         topicService.deleteTopic(Id);
-        return "topic with id "+ Id +" has been deleted";
+        return "topic with id " + Id + " has been deleted";
+    }
+
+    @PatchMapping("/{topic-id}/{course-id}")
+    public Topic updateTopicCourse(@PathVariable("course-id") String courseId,
+                                   @PathVariable("topic-id") String topicId) {
+        return courseService.updateTopicCourse(topicId, courseId);
     }
 }

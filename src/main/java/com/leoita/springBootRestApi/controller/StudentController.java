@@ -1,6 +1,8 @@
 package com.leoita.springBootRestApi.controller;
 
 import com.leoita.springBootRestApi.model.Student;
+import com.leoita.springBootRestApi.service.AddressService;
+import com.leoita.springBootRestApi.service.CourseService;
 import com.leoita.springBootRestApi.service.StudentService;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
+    private final CourseService courseService;
+    private final AddressService addressService;
 
     @GetMapping
     public List<Student> getStudents() {
@@ -54,6 +58,18 @@ public class StudentController {
     @DeleteMapping("/{student-id}")
     public String deleteStudent(@PathVariable("student-id") String Id) {
         studentService.deleteStudent(Id);
-        return "student with id "+ Id +" has been deleted";
+        return "student with id " + Id + " has been deleted";
+    }
+
+    @PatchMapping("/{student-id}/{course-id}")
+    public Student updateStudentCourse(@PathVariable("course-id") String courseId,
+                                       @PathVariable("student-id") String studentId) {
+        return courseService.updateStudentCourse(studentId, courseId);
+    }
+
+    @PatchMapping("/{student-id}/{address-id}")
+    public Student assignAddressToStudent(@PathVariable("address-id") String addressId,
+                                          @PathVariable("student-id") String studentId) {
+        return addressService.assignAddressToStudent(studentId, addressId);
     }
 }
