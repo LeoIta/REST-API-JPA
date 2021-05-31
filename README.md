@@ -24,9 +24,9 @@
     <td>MANY students <-- ONE course</td>
     <td><p>@ManyToOne</p><p>@OneToMany</p></td>
     <td><p>public class Student {<br>
-    @ManyToOne(fetch = FetchType.LAZY)<br>
+    @ManyToOne<br>
     @JoinColumn(name="course_id")<br>
-    @JsonIgnoreProperties("student")<br>
+    @JsonIgnoreProperties("students")<br>
     private Course course;<br>}
     <br>--------------------------------------------------------------------<br>
     @Table(name="course")<br>
@@ -47,13 +47,13 @@
     &emsp;&emsp;&emsp;&emsp;name = "Topic_Course",<br>
     &emsp;&emsp;&emsp;&emsp;joinColumns = {@JoinColumn(name = "topic_id")},<br>
     &emsp;&emsp;&emsp;&emsp;inverseJoinColumns = {@JoinColumn(name = "course_id")}<br>
-    @JsonIgnoreProperties("topic")<br>
+    @JsonIgnoreProperties("topics")<br>
     private Set&lt;Course&gt; courses;<br>}
     <br>--------------------------------------------------------------------<br>
     @Table(name="course")<br>
     public class Course {<br>
     @ManyToMany(mappedBy = "courses")<br>)<br>
-    @JsonIgnoreProperties("course")<br>
+    @JsonIgnoreProperties("courses")<br>
     private Set&lt;Topic&gt; topics;<br>}
     </td>
   </tr>
