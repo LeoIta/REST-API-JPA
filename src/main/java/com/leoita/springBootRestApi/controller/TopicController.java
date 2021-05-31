@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/topic")
+@RequestMapping("/topics")
 @RequiredArgsConstructor
 public class TopicController {
     private final TopicService topicService;
@@ -57,11 +57,5 @@ public class TopicController {
     public String deleteTopic(@PathVariable("id") String Id) {
         topicService.deleteTopic(Id);
         return "topic with id " + Id + " has been deleted";
-    }
-
-    @PatchMapping("/{topic-id}/{course-id}")
-    public Topic updateTopicCourse(@PathVariable("course-id") String courseId,
-                                   @PathVariable("topic-id") String topicId) {
-        return courseService.updateTopicCourse(topicId, courseId);
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 @RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
@@ -61,15 +61,9 @@ public class StudentController {
         return "student with id " + Id + " has been deleted";
     }
 
-    @PatchMapping("/{student-id}/{course-id}")
-    public Student updateStudentCourse(@PathVariable("course-id") String courseId,
-                                       @PathVariable("student-id") String studentId) {
-        return courseService.updateStudentCourse(studentId, courseId);
-    }
-
-    @PatchMapping("/{student-id}/{address-id}")
+    @PatchMapping("/{student-id}/addresses/{address-id}")
     public Student assignAddressToStudent(@PathVariable("address-id") String addressId,
                                           @PathVariable("student-id") String studentId) {
-        return addressService.assignAddressToStudent(studentId, addressId);
+        return studentService.assignAddressToStudent(studentId, addressId);
     }
 }

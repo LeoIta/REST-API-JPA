@@ -37,22 +37,14 @@ public class CourseService {
         courseRepository.deleteById(id);
     }
 
-    public Course addStudentToCourse(String courseId, String studentId) {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new IllegalArgumentException("no such course"));
-        Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new IllegalArgumentException("no such student"));
-        course.getStudents().add(student);
-        return courseRepository.save(course);
-    }
-
-    public Student updateStudentCourse(String studentId, String courseId) {
+    public Course addStudentToCourse(String studentId, String courseId) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new IllegalArgumentException("no such course"));
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalArgumentException("no such student"));
         student.setCourse(course);
-        return studentRepository.save(student);
+        course.getStudents().add(student);
+        return courseRepository.save(course);
     }
 
     public Course addTopicToCourse(String courseId, String topicId) {
@@ -61,16 +53,8 @@ public class CourseService {
         Topic topic = topicRepository.findById(topicId)
                 .orElseThrow(() -> new IllegalArgumentException("no such topic"));
         course.getTopics().add(topic);
-        return courseRepository.save(course);
-    }
-
-    public Topic updateTopicCourse(String topicId, String courseId) {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new IllegalArgumentException("no such course"));
-        Topic topic = topicRepository.findById(topicId)
-                .orElseThrow(() -> new IllegalArgumentException("no such topic"));
         topic.getCourses().add(course);
-        return topicRepository.save(topic);
+        return courseRepository.save(course);
     }
 
 }

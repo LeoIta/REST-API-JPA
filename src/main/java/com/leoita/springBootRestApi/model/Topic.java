@@ -22,6 +22,6 @@ public class Topic extends BaseEntity {
             joinColumns = {@JoinColumn(name = "topic_id")},
             inverseJoinColumns = {@JoinColumn(name = "course_id")}
     )
-    @JsonIgnoreProperties("topic")
+    @JsonIgnoreProperties("topics")
     private Set<Course> courses;
 }

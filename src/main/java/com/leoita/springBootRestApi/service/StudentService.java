@@ -1,6 +1,8 @@
 package com.leoita.springBootRestApi.service;
 
+import com.leoita.springBootRestApi.model.Address;
 import com.leoita.springBootRestApi.model.Student;
+import com.leoita.springBootRestApi.repository.AddressRepository;
 import com.leoita.springBootRestApi.repository.CourseRepository;
 import com.leoita.springBootRestApi.repository.StudentRepository;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final AddressRepository addressRepository;
+
 
     public List<Student> getStudents() {
         return studentRepository.findAll();
@@ -32,4 +36,14 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
+    public Student assignAddressToStudent(String studentId, String addressId) {
+        Address address = addressRepository.findById(addressId)
+                .orElseThrow(() -> new IllegalArgumentException("no such address"));
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("no such student"));
+        student.setAddress(address);
+        address.setStudent(student);
+        addressRepository.save(address);
+        return studentRepository.save(student);
+    }
 }

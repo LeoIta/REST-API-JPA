@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/addresses")
 @RequiredArgsConstructor
 public class AddressController {
     private final AddressService addressService;
@@ -50,11 +50,5 @@ public class AddressController {
             }
         });
         return addressService.saveAddress(address);
-    }
-
-    @PatchMapping("/{address-id}/{student-id}")
-    public Address assignAddressToStudent(@PathVariable("address-id") String addressId,
-                                          @PathVariable("student-id") String studentId) {
-        return addressService.assignStudentToAddress(addressId, studentId);
     }
 }

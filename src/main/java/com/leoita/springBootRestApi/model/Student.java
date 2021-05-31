@@ -12,8 +12,9 @@ import javax.persistence.*;
 public class Student extends BaseEntity {
     private String studentName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="course_id")
+    @JsonIgnoreProperties("students")
     private Course course;
 
     @OneToOne(cascade = CascadeType.ALL)

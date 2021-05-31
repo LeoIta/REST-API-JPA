@@ -1,5 +1,6 @@
 package com.leoita.springBootRestApi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class Course extends BaseEntity {
     private String courseName;
 
     @ManyToMany(mappedBy = "courses")
-    @JsonIgnoreProperties("course")
+    @JsonIgnoreProperties("courses")
     private Set<Topic> topics;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)

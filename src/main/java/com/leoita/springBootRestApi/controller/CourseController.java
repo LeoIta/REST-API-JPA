@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/courses")
 @RequiredArgsConstructor
 public class CourseController {
     private final CourseService courseService;
@@ -57,13 +57,13 @@ public class CourseController {
         return "course with id " + Id + " has been deleted";
     }
 
-    @PatchMapping("/{course-id}/{student-id}")
+    @PatchMapping("/{course-id}/students/{student-id}")
     public Course addStudentToCourse(@PathVariable("course-id") String courseId,
                                      @PathVariable("student-id") String studentId) {
-        return courseService.addStudentToCourse(courseId, studentId);
+        return courseService.addStudentToCourse(studentId,courseId);
     }
 
-    @PatchMapping("/{course-id}/{topic-id}")
+    @PatchMapping("/{course-id}/topics/{topic-id}")
     public Course addTopicToCourse(@PathVariable("course-id") String courseId,
                                    @PathVariable("topic-id") String topicId) {
         return courseService.addTopicToCourse(courseId, topicId);
